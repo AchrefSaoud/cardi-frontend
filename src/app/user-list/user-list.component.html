@@ -1,0 +1,83 @@
+<div class="container py-4">
+    <!-- Filter Input -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search users..."
+          [(ngModel)]="searchTerm"
+          (input)="filterUsers()" />
+      </div>
+      <div class="col-md-6 text-end">
+        <button
+          class="btn btn-primary"
+          (click)="openModal('create')">Create New User</button>
+      </div>
+    </div>
+
+    <!-- User Cards -->
+    <div class="row">
+      <div
+        class="col-md-4"
+        *ngFor="let user of filteredUsers">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ user.name }}</h5>
+            <p class="card-text">{{ user.email }}</p>
+            <button
+              class="btn btn-secondary btn-sm"
+              (click)="openModal('view', user)">View Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <!-- Modal -->
+<div
+class="custom-modal"
+*ngIf="isModalOpen"
+(click)="closeModal($event)">
+<div class="custom-modal-dialog" (click)="$event.stopPropagation()">
+  <div class="custom-modal-header">
+    <h5 class="custom-modal-title">{{ modalTitle }}</h5>
+    <button type="button" class="btn-close" (click)="closeModal()"></button>
+  </div>
+  <div class="custom-modal-body">
+    <ng-container *ngIf="modalMode === 'view'">
+      <!-- User Details -->
+      <p><strong>Name:</strong> {{ selectedUser?.name }}</p>
+      <p><strong>Email:</strong> {{ selectedUser?.email }}</p>
+      <p><strong>History:</strong></p>
+      <ul>
+        <li *ngFor="let history of selectedUser?.history">{{ history }}</li>
+      </ul>
+    </ng-container>
+
+    <ng-container *ngIf="modalMode === 'create'">
+      <!-- Create New User Form -->
+      <form [formGroup]="userForm" (ngSubmit)="createUser()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            id="name"
+            type="text"
+            class="form-control"
+            formControlName="name" />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            id="email"
+            type="email"
+            class="form-control"
+            formControlName="email" />
+        </div>
+        <button type="submit" class="btn btn-success">Create</button>
+      </form>
+    </ng-container>
+  </div>
+</div>
+</div>

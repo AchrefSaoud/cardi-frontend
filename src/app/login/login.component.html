@@ -1,0 +1,97 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="custom-div w-50 p-4 bg-light border rounded">
+    <ul class="nav nav-pills nav-justified mb-3" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a 
+          class="nav-link" 
+          [ngClass]="{'active': currentTab === 'login'}" 
+          (click)="switchTab('login')" 
+          href="javascript:void(0)">
+          Login
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a 
+          class="nav-link" 
+          [ngClass]="{'active': currentTab === 'register'}" 
+          (click)="switchTab('register')" 
+          href="javascript:void(0)">
+          Register
+        </a>
+      </li>
+    </ul>
+
+    <!-- Pills content -->
+    <div class="tab-content">
+      <!-- Login Tab -->
+      <div 
+        *ngIf="currentTab === 'login'" 
+        class="tab-pane fade show active" 
+        role="tabpanel">
+        <form
+        (ngSubmit)="handleLogin()"
+        >
+          <!-- Login form content -->
+          <!-- Replace your login form here -->
+          <div class="text-center mb-3">
+            <p>Sign in with:</p>
+            <button class="btn btn-link btn-floating mx-1">
+              <i class="fab fa-facebook-f"></i>
+            </button>
+            <button class="btn btn-link btn-floating mx-1">
+              <i class="fab fa-google"></i>
+            </button>
+          </div>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="loginName">Email or username</label>
+            <input type="email" [(ngModel)]="loginData.username" id="loginName" name="username" class="form-control" />
+
+          </div>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="loginPassword">Password</label>
+            <input type="password" [(ngModel)]="loginData.password" name="password" id="loginPassword" class="form-control" />
+
+          </div>
+          <button class="btn btn-primary btn-block mb-4" type="submit">Sign in</button>
+        </form>
+      </div>
+
+      <!-- Register Tab -->
+      <div 
+        *ngIf="currentTab === 'register'" 
+        class="tab-pane fade show active" 
+        role="tabpanel">
+        <form (ngSubmit)="handleRegister()">
+          <!-- Register form content -->
+        
+          <div class="text-center mb-3">
+            <p>Sign up with:</p>
+            <button class="btn btn-link btn-floating mx-1">
+              <i class="fab fa-facebook-f"></i>
+            </button>
+            <button class="btn btn-link btn-floating mx-1">
+              <i class="fab fa-google"></i>
+            </button>
+          </div>
+        
+          <div class="form-outline mb-4">
+            <label class="form-label" for="registerEmail">Username</label>
+            <input type="text" [(ngModel)]="registerData.username" id="registerEmail" name="username" class="form-control" />
+          </div>
+        
+          <div class="form-outline mb-4">
+            <label class="form-label" for="registerPassword">Password</label>
+            <input type="password" [(ngModel)]="registerData.password" id="registerPassword" name="password" class="form-control" />
+          </div>
+        
+          <div class="form-outline mb-4">
+            <label class="form-label" for="registerConfirmPassword">Confirm Password</label>
+            <input type="password" id="registerConfirmPassword" [(ngModel)]="registerData.confirmPassword" name="confirmPassword" class="form-control" />
+          </div>
+        
+          <button class="btn btn-primary btn-block mb-4" type="submit">Register</button>
+        </form>
+      </div>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="dashboard">
+    <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+      <div class="sidebar-header">
+        <img src="assets/images/kardi.png" alt="Logo" class="logo"  />
+      </div>
+      <nav class="sidebar-nav">
+        <a routerLink="/home/list-users">
+          <i class="icon bi bi-house-door"></i>
+          <span *ngIf="!isSidebarCollapsed">Home</span>
+        </a>
+      </nav>
+    </aside>
+    <div class="main-content">
+      <header class="navbar">
+        <div class="navbar-left">
+          <button class="collapse-btn" (click)="toggleSidebar()">
+            {{ isSidebarCollapsed ? '☰':'X' }}
+          </button>
+        </div>
+        <div class="navbar-icons">
+          <div class="icon-wrapper">
+            <img src="assets/images/notif_bell.png" class="icon notification-icon" width="30" height="30" (click)="toggleNotif()" />
+          </div>
+          <div class="icon-wrapper">
+            <img src="assets/images/pp.jpeg" alt="Profile" class="profile-image" (click)="toggleProfileMenu()" />
+          </div>
+        </div>
+        <div class="notification-dropdown"*ngIf="isNotifOpen">
+          <a *ngFor="let notif of FakeNotifs"> {{notif.title}} : <br> {{notif.description}} </a>
+        </div>
+        <div class="profile-dropdown" *ngIf="isProfileMenuOpen">
+          <a routerLink="/profile">Profile</a>
+          <a routerLink="/settings">Settings</a>
+          <a (click)="logout()">Logout</a>
+        </div>
+      </header>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>

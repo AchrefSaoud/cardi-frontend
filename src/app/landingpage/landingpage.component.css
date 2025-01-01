@@ -1,0 +1,56 @@
+/* General Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+#hero {
+  background: linear-gradient(135deg, #6f42c1, #1f8ef1);
+}
+
+.animate-text {
+  animation: fadeInUp 1.5s ease-in-out;
+}
+
+.animate-button {
+  animation: bounce 1.5s infinite;
+}
+
+.feature-card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  0% {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-10px);
+  }
+}
+
+/* Slide-in Effect */
+.slide-in {
+  animation: slideIn 1s ease-in-out;
+}
+
+@keyframes slideIn {
+  from {
+      transform: translateX(-100%);
+  }
+  to {
+      transform: translateX(0);
+  }
+}
